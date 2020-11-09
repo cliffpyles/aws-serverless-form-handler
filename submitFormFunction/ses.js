@@ -13,24 +13,23 @@
   SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-'use strict'
+"use strict";
 
-const AWS = require('aws-sdk')
-AWS.config.update({ region: process.env.AWS_REGION || 'us-east-1' })
-const SES = new AWS.SES()
+const AWS = require("aws-sdk");
+AWS.config.update({ region: process.env.AWS_REGION || "us-east-1" });
+const SES = new AWS.SES();
 
 const sendEmail = async function (formData) {
-
   const getContent = (formData) => {
-    let retval = ''
-    for (var attribName in formData){
-      retval += attribName + ': ' + formData[attribName] + '\n\n'
+    let retval = "";
+    for (var attribName in formData) {
+      retval += attribName + ": " + formData[attribName] + "\n\n";
     }
-    return retval
-  }
-  
-  return new Promise(async (resolve, reject) => {
+    return retval;
+  };
 
+  return new Promise(async (resolve, reject) => {
+    const content = getContent(formData);
     // Build params for SES
     const emailParams = {
       Source: process.env.ValidatedEmail, // SES SENDING EMAIL
@@ -41,26 +40,26 @@ const sendEmail = async function (formData) {
       Message: {
         Body: {
           Text: {
-            Charset: 'UTF-8',
-            Data: getContent(formData)
+            Charset: "UTF-8",
+            Data: content,
           },
         },
         Subject: {
-          Charset: 'UTF-8',
-          Data: 'New Form Submission'
+          Charset: "UTF-8",
+          Data: content.subject,
         },
       },
-    }
+    };
     // Send the email
     try {
-      const result = await SES.sendEmail(emailParams).promise()
-      console.log('sendEmail result: ', result)
-      resolve()
+      const result = await SES.sendEmail(emailParams).promise();
+      console.log("sendEmail result: ", result);
+      resolve();
     } catch (err) {
-      console.error('sendEmail error: ', err)
-      reject()
+      console.error("sendEmail error: ", err);
+      reject();
     }
-  })
-}
+  });
+};
 
-module.exports = { sendEmail }
+module.exports = { sendEmail };

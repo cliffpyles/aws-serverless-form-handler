@@ -1,5 +1,5 @@
 {
-  "name": "form-handler",
+  "name": "contact-form",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -7,9 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "James Beswick, Amazon Web Services",
+  "author": "Cliff Pyles",
   "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.478.0"
-  }
+  },
+  "private": true
 }

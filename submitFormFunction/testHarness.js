@@ -13,16 +13,16 @@
   SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-const { handler } = require('./app')
+const { handler } = require("./app");
 
 // Mock event
 const event = {
-  "body": "{\"name\": \"Sender Name\",\"reply_to\": \"sender@email.com\",\"message\": \"A test message\"}"
-}
+  body:
+    '{"name": "Sender Name","reply_to": "sender@email.com","subject": "A test subject","message": "A test message"}',
+};
 
 const main = async () => {
-  await handler(event)
-}
+  await handler(event);
+};
 
-main()
-
+main();
