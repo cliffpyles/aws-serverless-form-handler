@@ -33,7 +33,7 @@ const sendEmail = async function (formData) {
     // Build params for SES
     const emailParams = {
       Source: process.env.ValidatedEmail, // SES SENDING EMAIL
-      ReplyToAddresses: [process.env.ValidatedEmail],
+      ReplyToAddresses: [content.email],
       Destination: {
         ToAddresses: [process.env.ValidatedEmail], // SES RECEIVING EMAIL
       },
