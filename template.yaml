@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: >
   Serverless Form Handler - accepts a form submission from a webpage, saving the data to a DynamoDB table and sending an email via SES.
@@ -18,21 +18,21 @@ Globals:
     Timeout: 10
   Api:
     EndpointConfiguration: EDGE
-    Cors: 
+    Cors:
       AllowMethods: "'OPTIONS,POST'"
       AllowHeaders: "'Content-Type'"
-      AllowOrigin: "'*'"    
+      AllowOrigin: "'*'"
 
 Resources:
   FormDataTable:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-      - AttributeName: formId
-        AttributeType: S
+        - AttributeName: formId
+          AttributeType: S
       KeySchema:
-      - AttributeName: formId
-        KeyType: HASH
+        - AttributeName: formId
+          KeyType: HASH
       BillingMode: PAY_PER_REQUEST
   SubmitFormFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -54,7 +54,7 @@ Resources:
         HttpPost:
           Type: Api
           Properties:
-            Path: '/submitForm'
+            Path: "/submitForm"
             Method: post
 
 Outputs:
